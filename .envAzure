@@ -1,2 +1,2 @@
-# azure Cosmosbd bajos RUI PARA TODAS LA PETICIONES
-# DB_CONNECTION_STRING=mongodb://hotelsmart:G2gRNHUaFDFl8nkEfRP3IYo2P0rgK5CiXsSGxvu3fI4WLDtTsE9KwHbDj1aabwgAOqRuKR9UUP7YACDbZI56XQ==@hotelsmart.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&maxIdleTimeMS=120000&appName=@hotelsmart@
+
+DB_CONNECTION_STRING=mongodb://hotelsmart:G2gRNHUaFDFl8nkEfRP3IYo2P0rgK5CiXsSGxvu3fI4WLDtTsE9KwHbDj1aabwgAOqRuKR9UUP7YACDbZI56XQ==@hotelsmart.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&maxIdleTimeMS=120000&appName=@hotelsmart@
