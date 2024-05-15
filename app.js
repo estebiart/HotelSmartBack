@@ -14,28 +14,30 @@ const port = process.env.PORT || 3000;
 main().catch((err) => console.log(err));
 
 async function main() {
-  await mongoose.connect(process.env.DB_CONNECTION_STRING);
-
-  console.log("Conectado a la base de datos");
+  try {
+    await mongoose.connect(process.env.DB_CONNECTION_STRING, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    console.log("Connected to the database");
+  } catch (err) {
+    console.error("Error connecting to the database:", err);
+  }
 }
 
 app.use("/api/signup", require("./routes/signup"));
 app.use("/api/login", require("./routes/login"));
 app.use("/api/signout", require("./routes/signout"));
 
-// Ruta para renovar el token de acceso utilizando el token de actualización
+
 app.use("/", require("./routes/room"));
 app.use("/api/refresh-token", require("./routes/refreshToken"));
-
-
 
 app.use("/api/hotels", require("./routes/hotel"));
 app.use("/api/booking", require("./routes/booking"));
 
- app.use(authenticateToken);
+app.use(authenticateToken);
 app.use("/api/user", require("./routes/user"));
-
-
 
 app.listen(port, () => {
   console.log(`Server is up on port ${port}`);
