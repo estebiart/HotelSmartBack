@@ -7,7 +7,8 @@ const HotelSchema = new Mongoose.Schema({
   place: { type: String, required: true },
   address: { type: String, required: true },
   description: { type: String, required: true },
-  rooms: [{ type: Schema.Types.ObjectId, ref: 'Room' }]
+  rooms: [{ type: Schema.Types.ObjectId, ref: 'Room' }],
+  availability: Boolean
 });
 
 module.exports = Mongoose.model("Hotel", HotelSchema);

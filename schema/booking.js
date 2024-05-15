@@ -2,6 +2,7 @@ const Mongoose = require("mongoose");
 const Schema = Mongoose.Schema; 
 
 const BookingSchema = new Mongoose.Schema({
+  
   names: { type: String, required: true },
   lastnames: { type: String, required: true },
   birthdate: { type: String, required: true },
@@ -13,7 +14,11 @@ const BookingSchema = new Mongoose.Schema({
   asociateName: { type: String, required: true },
   asociateNumber: { type: String, required: true },
   hotel: { type: Schema.Types.ObjectId, ref: 'Hotel' }, 
-  rooms: [{ type: Schema.Types.ObjectId, ref: 'Room' }]
+  rooms: [{ type: Schema.Types.ObjectId, ref: 'Room' }],
+  checkInDate: { type: Date, required: true }, 
+  checkOutDate: { type: Date, required: true }, 
+  numberOfPeople: { type: Number, required: true }, 
+  destinationCity: { type: String, required: true } 
 });
 
 module.exports = Mongoose.model("Booking", BookingSchema);

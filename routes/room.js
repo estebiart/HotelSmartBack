@@ -36,4 +36,32 @@ router.post("/api/hotels/:hotelId/rooms", async (req, res) => {
   }
 });
 
+router.put("/api/hotels/:hotelId/rooms/:roomId", async (req, res) => {
+  try {
+      const { hotelId, roomId } = req.params;
+      const updatedRoomData = req.body; 
+      const hotel = await Hotel.findById(hotelId);
+      if (!hotel) {
+          return res.status(404).json({ error: "Hotel not found" });
+      }
+
+      const room = await Room.findOne({ _id: roomId, hotel: hotelId });
+      if (!room) {
+          return res.status(404).json({ error: "Room not found" });
+      }
+
+      for (const key in updatedRoomData) {
+          if (key !== "_id" && key !== "hotel") {
+              room[key] = updatedRoomData[key];
+          }
+      }
+
+      await room.save();
+
+      return res.status(200).json({ message: "Room updated successfully", room });
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Error updating room" });
+  }
+});
 module.exports = router;

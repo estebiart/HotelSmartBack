@@ -29,31 +29,28 @@ router.get("/", async (req, res) => {
 
 
 router.post("/", upload.array("image", 5), async (req, res) => {
+
   try {
     let imagePaths = [];
 
-    // Verificar si se han enviado imágenes
     if (req.files && req.files.length > 0) {
-      // Obtener las rutas de las imágenes subidas
       imagePaths = req.files.map(file => file.path);
     }
 
-    // Crear el objeto de hotel con los datos recibidos
+
     const hotel = new Hotel({
-      idUser: req.user.id,
       name: req.body.name,
-      images: imagePaths, // Guardar las rutas de las imágenes
+      images: imagePaths, 
       place: req.body.place,
       address: req.body.address,
       description: req.body.description,
+      availability:true
     });
 
-    // Guardar el objeto de hotel en la base de datos
     const hotelInfo = await hotel.save();
-    // console.log({ hotelInfo });
     res.json(hotelInfo);
   } catch (error) {
-    // console.log(error);
+    console.log(error);
     res.status(500).json({ error: "Error al crear el hotel" });
   }
 });
@@ -75,9 +72,11 @@ router.get("/:hotelId", async (req, res) => {
 router.put("/:hotelId", async (req, res) => {
   try {
     const hotelId = req.params.hotelId;
+    console.log("hotelId ",hotelId )
     const updateFields = req.body; 
-
+    console.log("updateFields ",updateFields )
     const updatedHotel = await Hotel.findByIdAndUpdate(hotelId, updateFields, { new: true });
+    console.log("updatedHotel ",updatedHotel)
 
     if (!updatedHotel) {
       return res.status(404).json({ error: "Hotel not found" });

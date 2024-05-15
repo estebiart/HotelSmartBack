@@ -27,12 +27,12 @@ app.use("/api/signout", require("./routes/signout"));
 app.use("/", require("./routes/room"));
 app.use("/api/refresh-token", require("./routes/refreshToken"));
 
-//  app.use(authenticateToken);
+
 
 app.use("/api/hotels", require("./routes/hotel"));
 app.use("/api/booking", require("./routes/booking"));
 
-
+ app.use(authenticateToken);
 app.use("/api/user", require("./routes/user"));
 
 
