@@ -15,10 +15,7 @@ main().catch((err) => console.log(err));
 
 async function main() {
   try {
-    await mongoose.connect(process.env.DB_CONNECTION_STRING, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(process.env.DB_CONNECTION_STRING);
     console.log("Connected to the database");
   } catch (err) {
     console.error("Error connecting to the database:", err);
@@ -28,7 +25,6 @@ async function main() {
 app.use("/api/signup", require("./routes/signup"));
 app.use("/api/login", require("./routes/login"));
 app.use("/api/signout", require("./routes/signout"));
-
 
 app.use("/", require("./routes/room"));
 app.use("/api/refresh-token", require("./routes/refreshToken"));
