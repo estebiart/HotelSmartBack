@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "node app.js"
-  },
+    "build": "pm2 start app.js --name myApp --watch --max-restarts 3 --max-memory-restart 150M"
+  },  
   "keywords": [],
   "author": "",
   "license": "ISC",

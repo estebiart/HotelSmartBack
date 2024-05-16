@@ -25,12 +25,12 @@ jobs:
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_RED_STONE_096221610 }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "/" # App source code path
-          api_location: "" # Api source code path - optional
-          output_location: "" # Built app content directory - optional
-          build_timeout_in_minutes: 30  # Ajusta el tiempo de espera aquí
+          app_location: "/"
+          api_location: "" 
+          output_location: "" 
+          build_timeout_in_minutes: 30  
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
