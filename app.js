@@ -9,7 +9,7 @@ require("dotenv").config();
 app.use(express.json());
 app.use(cors());
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 443;
 
 main().catch((err) => console.log(err));
 
