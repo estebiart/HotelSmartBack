@@ -12,7 +12,6 @@ jobs:
   build_and_deploy_job:
     runs-on: ubuntu-latest
     name: Build and Deploy Job
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -26,8 +25,8 @@ jobs:
         run: npm install
 
       - name: Install PM2
-          run: npm install pm2 -g
-          
+        run: npm install pm2 -g
+
       - name: Build the app
         run: npm run build
 
