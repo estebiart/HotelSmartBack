@@ -60,6 +60,7 @@ jobs:
           app-name: 'hotelSmartBack'
           slot-name: 'production'
           package: .
+          build_timeout_in_minutes: 60  
 
       - name: Azure Logout
         run: az logout
