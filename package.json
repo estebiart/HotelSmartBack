@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "build": "pm2 start app.js --name myApp --watch --max-restarts 3 --max-memory-restart 150M"
-  },  
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@azure/storage-blob": "^12.18.0",
     "bcrypt": "^5.1.1",
     "bunyan": "^1.8.15",
     "cors": "^2.8.5",
