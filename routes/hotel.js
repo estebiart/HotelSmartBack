@@ -2,17 +2,19 @@ const express = require("express");
 const router = express.Router();
 const Hotel = require("../schema/hotel");
 const multer = require("multer");
-const path = require("path");ç
-const { BlobServiceClient } = require("@azure/storage-blob");
-require("dotenv").config();
+const path = require("path");
 
+// Configurar multer para guardar las imágenes en el directorio "uploads"
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, "../uploads"));
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
 
-const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
-
-const blobServiceClient = BlobServiceClient.fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING);
-const containerClient = blobServiceClient.getContainerClient(process.env.AZURE_STORAGE_CONTAINER_NAME);
-
 
 router.get("/", async (req, res) => {
   try {
@@ -32,19 +34,8 @@ router.post("/", upload.array("image", 5), async (req, res) => {
     let imagePaths = [];
 
     if (req.files && req.files.length > 0) {
-      for (const file of req.files) {
-        const blobName = Date.now() + path.extname(file.originalname);
-        const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-
-        await blockBlobClient.uploadData(file.buffer, {
-          blobHTTPHeaders: { blobContentType: file.mimetype }
-        });
-
-        const imageUrl = blockBlobClient.url;
-        imageUrls.push(imageUrl);
-      }
+      imagePaths = req.files.map(file => file.path);
     }
-
 
 
     const hotel = new Hotel({
