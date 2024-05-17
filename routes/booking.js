@@ -26,11 +26,7 @@ router.post("/", async (req, res) => {
       asociateName,
       asociateNumber,
       hotel, 
-      rooms,
-      checkInDate, 
-      checkOutDate, 
-      numberOfPeople, 
-      destinationCity  
+      rooms 
     } = req.body;
 
     const booking = new Booking({
@@ -45,11 +41,7 @@ router.post("/", async (req, res) => {
       asociateName,
       asociateNumber,
       hotel: hotel, 
-      rooms: rooms,
-      checkInDate, 
-      checkOutDate, 
-      numberOfPeople, 
-      destinationCity   
+      rooms: rooms 
     });
 
     const bookingInfo = await booking.save();

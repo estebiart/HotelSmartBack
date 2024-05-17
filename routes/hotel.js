@@ -26,7 +26,7 @@ router.get("/", async (req, res) => {
 
 
 
-router.post("/", upload.array("images", 5), async (req, res) => {
+router.post("/", upload.array("image", 5), async (req, res) => {
 
   try {
     let imagePaths = [];
