@@ -1,14 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const Hotel = require("../schema/hotel");
-const multer = require("multer");
+// const multer = require("multer");
 const path = require("path");
 const { BlobServiceClient } = require("@azure/storage-blob");
 require("dotenv").config();
 
-
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
 
 const blobServiceClient = BlobServiceClient.fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING);
 const containerClient = blobServiceClient.getContainerClient(process.env.AZURE_STORAGE_CONTAINER_NAME);
@@ -26,7 +23,7 @@ router.get("/", async (req, res) => {
 
 
 
-router.post("/", upload.array("image", 5), async (req, res) => {
+router.post("/", async (req, res) => {
 
   try {
     let imagePaths = [];
